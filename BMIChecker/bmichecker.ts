@@ -143,6 +143,11 @@ abstract class Index {
         return ordinalNumber == null ? "" : this.details[ordinalNumber].description;
     }
 
+    public getClassText(indexValue: number): string {
+        var ordinalNumber = this.getOrdinalNumber(indexValue);
+        return ordinalNumber == null ? "" : this.details[ordinalNumber].classText;
+    }
+
     public toOption(value: number): JQuery {
         return $("<option>").val(value).text(this.description);
     }
@@ -383,6 +388,10 @@ class IndexData {
         return this.selectedIndex.getDescription(indexValue);
     }
 
+    public getClassText(indexValue: number): string {
+        return this.selectedIndex.getClassText(indexValue);
+    }
+
     public initializeAgeDropdownList(ageDropdownList: JQuery, ordinalNumber: number): void {
         $.each(IndexData.indexes, (ordinalNumber, index) => ageDropdownList.append(index.toOption(ordinalNumber)));
         ageDropdownList.val(IndexData.getOrdinalNumber(ordinalNumber));
@@ -523,10 +532,11 @@ class Application {
         if (height <= 0.0)
             return;
         var indexValue = this.indexData.calculate(height, weight);
-        $("#indexValue").text(indexValue.toFixed(2).toString());
-        $("#indexDescription").text(this.indexData.getDescription(indexValue));
+        var classText  = this.indexData.getClassText(indexValue);
+        $("#indexValue"      ).text(indexValue.toFixed(2).toString()).attr("class", classText);
+        $("#indexDescription").text(this.indexData.getDescription(indexValue)).attr("class", classText);
         var standardWeight = this.indexData.calculateStandardWeight(height);
-        $("#standardWeight").text(Application.toFixedString(standardWeight));
+        $("#standardWeight"  ).text(Application.toFixedString(standardWeight));
         $("#deferenceFromStandardWeight").text(Application.toFixedString(weight - standardWeight));
 
         this.applicationData.store(ageOrdinalNumber, height, weight);
