@@ -1,0 +1,35 @@
+﻿body {
+    font-family: 'Segoe UI', sans-serif;
+}
+
+span {
+    font-style: italic;
+}
+
+.thinWeight2 {
+    background-color: #F2F7FD;
+}
+
+.thinWeight1 {
+    background-color: #E4FDFD;
+}
+
+.normalWeight {
+    background-color: #BFE7FF;
+}
+
+.overWeight1 {
+    background-color: #FFF2E8;
+}
+
+.overWeight2 {
+    background-color: #FFDFBD;
+}
+
+.overWeight3 {
+    background-color: #FFBF9D;
+}
+
+.overWeight4 {
+    background-color: #FF9F7D;
+}
