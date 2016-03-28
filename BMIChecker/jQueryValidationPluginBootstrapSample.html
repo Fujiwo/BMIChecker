@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="ja"><![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="ja"><![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="ja"><![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html lang="ja">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <title>jQuery-Validation-Plugin Bootstrap 連携サンプル</title>
+    <!--<link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">-->
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-7s5uDGW3AHqw6xtJmNNtr+OBRJUlgkNJEo78P4b0yRw= sha512-nNo+yCHEyn0smMxSswnf/OnX6/KwJuZTlNZBjauKhTK0c+zT+q5JOCx0UFhXQ6rJR9jg6Es8gPuD2uZcYDLqSw==" crossorigin="anonymous" />
+</head>
+<body>
+    <div class="container">
+        <!-- Bootstrapのフォーム -->
+        <form class="form-horizontal" method="get" action="">
+            <fieldset class="row">
+                <legend>入力フォーム</legend>
+                <!-- 各項目を form-group で区切る -->
+                <div class="form-group row">
+                    <label for="cname" class="control-label col-xs-3">名前 (必須、少なくとも2文字以上)</label>
+                    <div class="col-xs-9">
+                        <input id="cname" name="name" type="text" class="form-control" minlength="2" required digits>
+                    </div>
+                </div>
+                <!-- 各項目を form-group で区切る -->
+                <div class="form-group row">
+                    <label for="cemail" class="control-label col-xs-3">メールアドレス (必須)</label>
+                    <div class="col-xs-9">
+                        <input id="cemail" type="email" name="email" class="form-control" required>
+                    </div>
+                </div>
+                <!-- 各項目を form-group で区切る -->
+                <div class="form-group row">
+                    <label for="curl" class="control-label col-xs-3">URL (オプション)</label>
+                    <div class="col-xs-9">
+                        <input id="curl" type="url" name="url" class="form-control">
+                    </div>
+                </div>
+                <!-- 各項目を form-group で区切る -->
+                <div class="form-group row">
+                    <label for="ccomment" class="control-label col-xs-3">コメント (必須)</label>
+                    <div class="col-xs-9">
+                        <textarea id="ccomment" name="comment" class="form-control" required></textarea>
+                    </div>
+                </div>
+                <div class="btn-group col-xs-9 col-xs-offset-3">
+                    <button class="btn btn-primary" type="submit">送信</button>
+                    <button class="btn btn-default" type="reset">クリア</button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+
+    <!--[if lt IE 9]>
+        <script src="http://code.jquery.com/jquery-1.12.2.min.js"></script>
+    <![endif]-->
+    <!--[if gte IE 9]><!-->
+    <script src="http://code.jquery.com/jquery-2.2.2.min.js"></script>
+    <!--<![endif]-->
+    <!--<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.js"></script>-->
+    <script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/jquery.validate.min.js"></script>
+    <!--<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>-->
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha256-KXn5puMvxCw+dAYznun+drMdG1IFl3agK0p/pqT9KAo= sha512-2e8qq0ETcfWRI4HJBzQiA3UoyFk6tbNyG+qSaIBZLyW9Xf3sWZHN/lxe9fTh1U45DpPf07yj94KsUHHWe4Yk1A==" crossorigin="anonymous"></script>
+    <script src="jquery.validate.bootstrap3.js"></script>
+    <!--[if lt IE 9]>
+          <script src="http://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
+          <script src="http://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</body>
+</html>
