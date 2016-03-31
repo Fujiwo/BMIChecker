@@ -78,6 +78,18 @@ class IndexDetail {
                                                       : Helper.average(this.from, this.to));
     }
 
+    public get classText(): string {
+        return IndexDetail.classTexts[this.ordinalNumber];
+    }
+
+    public get fromText(): string {
+        return this.from == null ? " " : this.from.toString() + "以上";
+    }
+
+    public get toText(): string {
+        return this.to == null ? " " : this.to.toString() + "未満";
+    }
+
     public constructor(level: number, from: number, to: number, description: string) {
         this.level       = level      ;
         this.from        = from       ;
@@ -89,18 +101,6 @@ class IndexDetail {
         return $('<tr>').attr  ("class", this.classText)
                         .append('<td>' + this.fromText + " " + this.toText + '</td>')
                         .append('<td>' + this.description                  + '</td>');
-    }
-
-    public get classText(): string {
-        return IndexDetail.classTexts[this.ordinalNumber];
-    }
-
-    public get fromText(): string {
-        return this.from == null ? " " : this.from.toString() + "以上";
-    }
-
-    public get toText(): string {
-        return this.to == null ? " " : this.to.toString() + "未満";
     }
 
     public static levelToOrdinalNumber(level: number): number {
@@ -126,6 +126,14 @@ abstract class Index {
 
     public get normalValue(): number {
         return this.details[IndexDetail.levelToOrdinalNumber(0)].centerValue;
+    }
+
+    public get tableID() {
+        return this.name + "Table";
+    }
+
+    public get captionText(): string {
+        return this.linkText + ' &mdash; ' + this.description;
     }
 
     public constructor(kind: IndexKind, name: string, description: string, details: IndexDetail[]) {
@@ -166,6 +174,9 @@ abstract class Index {
         visible ? table.show() : table.hide();
         return table;
     }
+    
+    protected abstract kindText(): string;
+    protected abstract url(): string;
 
     protected static calculateKaupIndex(height: number, weight: number): number {
         return this.calculateBodyMassIndex(height, weight);
@@ -190,17 +201,6 @@ abstract class Index {
     protected static calculateBodyMassStandardWeight(height: number, normalValue: number): number {
         return normalValue * height * height;
     }
-
-    public get tableID() {
-        return this.name + "Table";
-    }
-
-    public get captionText(): string {
-        return this.linkText + ' &mdash; ' + this.description;
-    }
-    
-    protected abstract kindText(): string;
-    protected abstract url(): string;
 
     private get linkText(): string {
         return '<a href="' + this.url() + '" target="_top">' + this.kindText() + '</a>';
@@ -349,10 +349,6 @@ class IndexData {
         )
     ];
 
-    public get captionText(): string {
-        return this.selectedIndex.captionText;
-    }
-
     private _selected: number;
 
     public get selected(): number {
@@ -366,6 +362,10 @@ class IndexData {
 
     private get selectedIndex(): Index {
         return IndexData.indexes[this.selected];
+    }
+
+    public get captionText(): string {
+        return this.selectedIndex.captionText;
     }
 
     private get normalValue(): number {
@@ -454,7 +454,7 @@ class ApplicationData {
         return true;
     }
 
-    public save(): boolean {
+    private save(): boolean {
         if (!window.localStorage)
             return false;
 
