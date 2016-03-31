@@ -67,10 +67,10 @@ class IndexDetail {
         "overWeight4"
     ];
 
-    level      : number;
-    from       : number;
-    to         : number;
-    description: string;
+    private level      : number;
+    public  from       : number;
+    public  to         : number;
+    public  description: string;
 
     public get centerValue(): number {
         return this.from == null ? this.to
@@ -119,10 +119,10 @@ enum IndexKind {
 }
 
 abstract class Index {
-    kind        : IndexKind;
-    name        : string;
-    description : string;
-    details     : IndexDetail[];
+    private kind        : IndexKind;
+    private name        : string;
+    private description : string;
+    private details     : IndexDetail[];
 
     public get normalValue(): number {
         return this.details[IndexDetail.levelToOrdinalNumber(0)].centerValue;
@@ -290,7 +290,7 @@ class BodyMassIndex extends Index {
 }
 
 class IndexData {
-    static indexes: Index[] = [
+    private static indexes: Index[] = [
         new KaupIndex    ("kaup1", "乳児 (3か月以上)",
                           [new IndexDetail(-2, null, 14.5, "やせすぎ"),
                            new IndexDetail(-1, 14.5, 16.0, "やせぎみ"),
@@ -421,9 +421,9 @@ class IndexData {
 class ApplicationData {
     private static key = "ShoBmiChecker";
 
-    ageOrdinalNumber: number;
-    height          : number;
-    weight          : number;
+    public ageOrdinalNumber: number;
+    public height          : number;
+    public weight          : number;
 
     public constructor() {
         this.set(IndexData.defaultOrdinalNumber, null, null);

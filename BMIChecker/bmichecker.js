@@ -18,7 +18,7 @@ var Helper = (function () {
         return (value1 + value2) / 2.0;
     };
     return Helper;
-})();
+}());
 var BootstrapValidator = (function () {
     function BootstrapValidator(rules, messages) {
         this.initialize();
@@ -55,7 +55,7 @@ var BootstrapValidator = (function () {
         });
     };
     return BootstrapValidator;
-})();
+}());
 var IndexDetail = (function () {
     function IndexDetail(level, from, to, description) {
         this.level = level;
@@ -72,11 +72,6 @@ var IndexDetail = (function () {
         enumerable: true,
         configurable: true
     });
-    IndexDetail.prototype.toTableRow = function () {
-        return $('<tr>').attr("class", this.classText)
-            .append('<td>' + this.fromText + " " + this.toText + '</td>')
-            .append('<td>' + this.description + '</td>');
-    };
     Object.defineProperty(IndexDetail.prototype, "classText", {
         get: function () {
             return IndexDetail.classTexts[this.ordinalNumber];
@@ -98,6 +93,11 @@ var IndexDetail = (function () {
         enumerable: true,
         configurable: true
     });
+    IndexDetail.prototype.toTableRow = function () {
+        return $('<tr>').attr("class", this.classText)
+            .append('<td>' + this.fromText + " " + this.toText + '</td>')
+            .append('<td>' + this.description + '</td>');
+    };
     IndexDetail.levelToOrdinalNumber = function (level) {
         return level + 2;
     };
@@ -118,7 +118,7 @@ var IndexDetail = (function () {
         "overWeight4"
     ];
     return IndexDetail;
-})();
+}());
 var IndexKind;
 (function (IndexKind) {
     IndexKind[IndexKind["Kaup"] = 0] = "Kaup";
@@ -135,6 +135,20 @@ var Index = (function () {
     Object.defineProperty(Index.prototype, "normalValue", {
         get: function () {
             return this.details[IndexDetail.levelToOrdinalNumber(0)].centerValue;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Index.prototype, "tableID", {
+        get: function () {
+            return this.name + "Table";
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Index.prototype, "captionText", {
+        get: function () {
+            return this.linkText + ' &mdash; ' + this.description;
         },
         enumerable: true,
         configurable: true
@@ -181,20 +195,6 @@ var Index = (function () {
     Index.calculateBodyMassStandardWeight = function (height, normalValue) {
         return normalValue * height * height;
     };
-    Object.defineProperty(Index.prototype, "tableID", {
-        get: function () {
-            return this.name + "Table";
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Index.prototype, "captionText", {
-        get: function () {
-            return this.linkText + ' &mdash; ' + this.description;
-        },
-        enumerable: true,
-        configurable: true
-    });
     Object.defineProperty(Index.prototype, "linkText", {
         get: function () {
             return '<a href="' + this.url() + '" target="_top">' + this.kindText() + '</a>';
@@ -214,7 +214,7 @@ var Index = (function () {
         return null;
     };
     return Index;
-})();
+}());
 var KaupIndex = (function (_super) {
     __extends(KaupIndex, _super);
     function KaupIndex(name, description, details) {
@@ -233,7 +233,7 @@ var KaupIndex = (function (_super) {
         return "https://ja.wikipedia.org/wiki/%E3%83%8E%E3%83%BC%E3%83%88:%E3%82%AB%E3%82%A6%E3%83%97%E6%8C%87%E6%95%B0";
     };
     return KaupIndex;
-})(Index);
+}(Index));
 var RohrerIndex = (function (_super) {
     __extends(RohrerIndex, _super);
     function RohrerIndex(name, description, details) {
@@ -252,7 +252,7 @@ var RohrerIndex = (function (_super) {
         return "https://ja.wikipedia.org/wiki/%E3%83%AD%E3%83%BC%E3%83%AC%E3%83%AB%E6%8C%87%E6%95%B0";
     };
     return RohrerIndex;
-})(Index);
+}(Index));
 var BodyMassIndex = (function (_super) {
     __extends(BodyMassIndex, _super);
     function BodyMassIndex(name, description, details) {
@@ -278,18 +278,11 @@ var BodyMassIndex = (function (_super) {
         return "https://ja.wikipedia.org/wiki/%E3%83%9C%E3%83%87%E3%82%A3%E3%83%9E%E3%82%B9%E6%8C%87%E6%95%B0";
     };
     return BodyMassIndex;
-})(Index);
+}(Index));
 var IndexData = (function () {
     function IndexData() {
         this._selected = IndexData.defaultOrdinalNumber;
     }
-    Object.defineProperty(IndexData.prototype, "captionText", {
-        get: function () {
-            return this.selectedIndex.captionText;
-        },
-        enumerable: true,
-        configurable: true
-    });
     Object.defineProperty(IndexData.prototype, "selected", {
         get: function () {
             return this._selected;
@@ -304,6 +297,13 @@ var IndexData = (function () {
     Object.defineProperty(IndexData.prototype, "selectedIndex", {
         get: function () {
             return IndexData.indexes[this.selected];
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(IndexData.prototype, "captionText", {
+        get: function () {
+            return this.selectedIndex.captionText;
         },
         enumerable: true,
         configurable: true
@@ -400,7 +400,7 @@ var IndexData = (function () {
             new IndexDetail(4, 40.0, null, "肥満 (4度)")])
     ];
     return IndexData;
-})();
+}());
 var ApplicationData = (function () {
     function ApplicationData() {
         this.set(IndexData.defaultOrdinalNumber, null, null);
@@ -441,7 +441,7 @@ var ApplicationData = (function () {
     };
     ApplicationData.key = "ShoBmiChecker";
     return ApplicationData;
-})();
+}());
 var Application = (function () {
     function Application() {
         var _this = this;
@@ -522,6 +522,6 @@ var Application = (function () {
         return value == null ? "" : value.toFixed(2).toString();
     };
     return Application;
-})();
+}());
 $(document).ready(function () { return new Application(); });
 //# sourceMappingURL=bmichecker.js.map
