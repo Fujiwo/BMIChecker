@@ -23,14 +23,17 @@
   <ItemGroup>
     <Content Include="bmichecker.css" />
     <Content Include="bmichecker.html" />
+    <Content Include="bmicheckertest.html" />
     <Content Include="web.config">
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="bmichecker.ts" />
+    <TypeScriptCompile Include="bmicheckertest.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery.validation\jquery.validation.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\qunit\qunit.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
